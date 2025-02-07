@@ -11,7 +11,6 @@ const HomeScreen = ({ navigation }) => {
             const fetchData = async () => {
                 const transactions = await loadTransactions();
 
-                // Criar uma lista de produtos únicos
                 const uniqueProducts = [...new Map(transactions.map(item => [item.product, item])).values()];
                 setTransactions(uniqueProducts);
             };

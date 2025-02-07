@@ -39,19 +39,32 @@ const styles = StyleSheet.create({
     addProductContainer: {
         flex: 1,
         padding: 16,
-        justifyContent: 'center',
+        justifyContent: 'flex-start',
     },
-    picker: {
-        height: 50,
+    label: {
+        fontSize: 16,
+        fontWeight: 'bold',
+        marginRight: 8,
+        color: '#333',
+        width: 100,
+    },
+    inputContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
         marginBottom: 16,
     },
     input: {
-        height: 40,
+        height: 50,
         borderColor: '#ccc',
         borderWidth: 1,
         borderRadius: 8,
-        marginBottom: 16,
         paddingLeft: 8,
+        flex: 1,
+    },
+    picker: {
+        flex: 1,
+        height: 50,
+        marginLeft: 8,
     },
     button: {
         marginTop: 16,
@@ -61,6 +74,14 @@ const styles = StyleSheet.create({
         paddingHorizontal: 20,
         borderRadius: 8,
         alignItems: 'center',
+    },
+    dateInput: {
+        padding: 10,
+        borderWidth: 1,
+        borderColor: '#ccc',
+        borderRadius: 8,
+        flex: 1,
+        marginLeft: 8,
     },
 
     // Estilos para a tela de detalhes do produto (ProductDetailsScreen)
@@ -89,6 +110,19 @@ const styles = StyleSheet.create({
     productDetailText: {
         fontSize: 16,
         color: '#333',
+    },
+
+    // Estilo para o seletor de data
+    dateInput: {
+        height: 40,
+        borderColor: '#ccc',
+        borderWidth: 1,
+        borderRadius: 8,
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginBottom: 16,
+        paddingHorizontal: 8,
+        backgroundColor: '#f9f9f9',
     },
 });
 
