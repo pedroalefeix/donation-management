@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { View, TextInput, Button } from "react-native";
+import { Picker } from '@react-native-picker/picker';
 import { handleAddTransaction } from "../controllers/transactionController";
+import styles from "../styles/styles";
 
 const AddProductScreen = ({ navigation }) => {
     const [category, setCategory] = useState('');
@@ -24,12 +26,15 @@ const AddProductScreen = ({ navigation }) => {
     }
 
     return (
-        <View>
-            <TextInput placeholder="Category" value={category} onChangeText={setCategory} />
-            <TextInput placeholder="Product" value={product} onChangeText={setProduct} />
-            <TextInput placeholder="Quantity" value={quantity} onChangeText={setQuantity} keyboardType="numeric" />
-            <TextInput placeholder="Validity" value={validity} onChangeText={setValidity} keyboardType="numeric" />
-            <Button title='Adicionar Produto' onPress={handleAddProductPress} />
+        <View style={styles.addProductContainer}>
+            <Picker style={styles.picker} selectedValue={category} onValueChange={itemValue => setCategory(itemValue)}>
+                <Picker.Item label="Alimento" value="food" />
+                <Picker.Item label="Limpeza" value="cleaning" />
+            </Picker>
+            <TextInput placeholder="Produto" value={product} onChangeText={setProduct} />
+            <TextInput placeholder="Quantidade" value={quantity} onChangeText={setQuantity} keyboardType="numeric" />
+            <TextInput placeholder="Validade" value={validity} onChangeText={setValidity} keyboardType="numeric" />
+            <Button style={styles.button} title='Adicionar Produto' onPress={handleAddProductPress} />
         </View>
     );
 }

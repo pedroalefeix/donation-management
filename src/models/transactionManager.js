@@ -12,6 +12,14 @@ export const addTransaction = async (transaction) => {
     }
 }
 
+export const updateTransaction = async (transactions) => {
+    try {
+        await AsyncStorage.setItem(TRANSACTION_KEY, JSON.stringify(transactions));
+    } catch (error) {
+        console.error('Error updating transaction: ', error);
+    }
+}
+
 export const getTransactions = async () => {
     try {
         const transactions = await AsyncStorage.getItem(TRANSACTION_KEY);

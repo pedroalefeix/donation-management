@@ -1,0 +1,95 @@
+import { StyleSheet } from 'react-native';
+
+const styles = StyleSheet.create({    
+    // Estilos para a tela inicial (HomeScreen)
+    homeContainer: {
+        flex: 1,
+        padding: 16,
+        justifyContent: 'flex-start',
+    },
+    listItem: {
+        padding: 16,
+        borderBottomWidth: 1,
+        borderBottomColor: '#ddd',
+        marginBottom: 8,
+    },
+    listText: {
+        fontSize: 16,
+    },
+    homeButton: {
+        marginTop: 16,
+        backgroundColor: '#4CAF50',
+        color: '#fff',
+        paddingVertical: 12,
+        paddingHorizontal: 20,
+        borderRadius: 8,
+        alignItems: 'center',
+    },
+    clearButton: {
+        marginTop: 8,
+        backgroundColor: '#FF5733',
+        color: '#fff',
+        paddingVertical: 12,
+        paddingHorizontal: 20,
+        borderRadius: 8,
+        alignItems: 'center',
+    },
+
+    // Estilos para a tela de adicionar produto (AddProductScreen)
+    addProductContainer: {
+        flex: 1,
+        padding: 16,
+        justifyContent: 'center',
+    },
+    picker: {
+        height: 50,
+        marginBottom: 16,
+    },
+    input: {
+        height: 40,
+        borderColor: '#ccc',
+        borderWidth: 1,
+        borderRadius: 8,
+        marginBottom: 16,
+        paddingLeft: 8,
+    },
+    button: {
+        marginTop: 16,
+        backgroundColor: '#4CAF50',
+        color: '#fff',
+        paddingVertical: 12,
+        paddingHorizontal: 20,
+        borderRadius: 8,
+        alignItems: 'center',
+    },
+
+    // Estilos para a tela de detalhes do produto (ProductDetailsScreen)
+    detailsContainer: {
+        flex: 1,
+        padding: 16,
+        backgroundColor: '#F5F5F5',
+    },
+    title: {
+        fontSize: 24,
+        fontWeight: 'bold',
+        marginBottom: 16,
+        textAlign: 'center',
+        color: '#333',
+    },
+    productDetailItem: {
+        padding: 16,
+        backgroundColor: '#FFF',
+        borderRadius: 8,
+        marginBottom: 8,
+        shadowColor: '#000',
+        shadowOpacity: 0.1,
+        shadowOffset: { width: 0, height: 2 },
+        elevation: 3,
+    },
+    productDetailText: {
+        fontSize: 16,
+        color: '#333',
+    },
+});
+
+export default styles;
