@@ -16,10 +16,9 @@ const styles = StyleSheet.create({
     listText: {
         fontSize: 16,
     },
-    homeButton: {
+    addButton: {
         marginTop: 16,
         backgroundColor: '#4CAF50',
-        color: '#fff',
         paddingVertical: 12,
         paddingHorizontal: 20,
         borderRadius: 8,
@@ -28,11 +27,18 @@ const styles = StyleSheet.create({
     clearButton: {
         marginTop: 8,
         backgroundColor: '#FF5733',
-        color: '#fff',
         paddingVertical: 12,
         paddingHorizontal: 20,
         borderRadius: 8,
         alignItems: 'center',
+    },
+    addButtonText: {
+        color: '#fff',
+        fontWeight: 'bold',
+    },
+    clearButtonText: {
+        color: '#fff',
+        fontWeight: 'bold',
     },
 
     // Estilos para a tela de adicionar produto (AddProductScreen)
@@ -66,15 +72,15 @@ const styles = StyleSheet.create({
         height: 50,
         marginLeft: 8,
     },
-    button: {
-        marginTop: 16,
-        backgroundColor: '#4CAF50',
-        color: '#fff',
-        paddingVertical: 12,
-        paddingHorizontal: 20,
-        borderRadius: 8,
-        alignItems: 'center',
-    },
+    // button: {
+    //     marginTop: 16,
+    //     backgroundColor: '#4CAF50',
+    //     color: '#fff',
+    //     paddingVertical: 12,
+    //     paddingHorizontal: 20,
+    //     borderRadius: 8,
+    //     alignItems: 'center',
+    // },
     dateInput: {
         padding: 10,
         borderWidth: 1,
