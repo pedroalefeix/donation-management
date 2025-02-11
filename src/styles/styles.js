@@ -72,15 +72,6 @@ const styles = StyleSheet.create({
         height: 50,
         marginLeft: 8,
     },
-    // button: {
-    //     marginTop: 16,
-    //     backgroundColor: '#4CAF50',
-    //     color: '#fff',
-    //     paddingVertical: 12,
-    //     paddingHorizontal: 20,
-    //     borderRadius: 8,
-    //     alignItems: 'center',
-    // },
     dateInput: {
         padding: 10,
         borderWidth: 1,
@@ -116,6 +107,17 @@ const styles = StyleSheet.create({
     productDetailText: {
         fontSize: 16,
         color: '#333',
+    },
+    deleteButton: {
+        backgroundColor: 'red',
+        padding: 5,
+        borderRadius: 5,
+        marginTop: 5, // Add some margin
+        alignSelf: 'flex-start' // Align to the start of the parent
+    },
+    deleteButtonText: {
+        color: 'white',
+        fontSize: 12,
     },
 
     // Estilo para o seletor de data

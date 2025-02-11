@@ -1,10 +1,12 @@
+import 'react-native-get-random-values';
+import { v4 as uuidv4 } from 'uuid';
 import Transaction from "../models/transaction";
 import { addTransaction, getTransactions, clearTransactions } from "../models/transactionManager";
 
 export const handleAddTransaction = async (transactionData) => {
     try {
         const newTransaction = new Transaction(
-            Date.now(),
+            uuidv4(),
             transactionData.category,
             transactionData.product,
             transactionData.quantity,

@@ -20,6 +20,17 @@ export const updateTransaction = async (transactions) => {
     }
 }
 
+export const deleteTransaction = async (id) => {
+    try {
+        const transactions = await getTransactions() || [];
+        const updatedTransactions = transactions.filter(transaction => transaction.id !== id);
+
+        await AsyncStorage.setItem(TRANSACTION_KEY, JSON.stringify(updatedTransactions));
+    } catch (error) {
+        console.error('Error deleting transaction: ', error);
+    }
+}
+
 export const getTransactions = async () => {
     try {
         const transactions = await AsyncStorage.getItem(TRANSACTION_KEY);

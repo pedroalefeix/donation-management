@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { View, TextInput, TouchableOpacity, Text, Alert } from "react-native";
 import { Picker } from '@react-native-picker/picker';
 import DateTimePicker from '@react-native-community/datetimepicker';
@@ -11,6 +11,12 @@ const AddProductScreen = ({ navigation }) => {
     const [quantity, setQuantity] = useState('');
     const [validity, setValidity] = useState(new Date());
     const [showDatePicker, setShowDatePicker] = useState(false);
+
+    useEffect(() => {
+        const defaultValidity = new Date();
+        defaultValidity.setDate(defaultValidity.getDate() + 7); // Add 7 days
+        setValidity(defaultValidity); // Set the default validity
+    }, []);
 
     const handleAddProductPress = async () => {
         if (!product || !quantity) {
