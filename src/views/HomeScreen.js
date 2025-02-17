@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { View, Text, FlatList, TouchableOpacity } from "react-native";
-import { loadTransactions, handleClearTransactions } from "../controllers/transactionController";
+import { loadTransactions, handleClearTransactions, isNearExpiration } from "../controllers/transactionController";
 import styles from "../styles/styles";
 
 const HomeScreen = ({ navigation }) => {
     const [products, setProducts] = useState([]);
+    const [nearExpirationProducts, setNearExpirationProducts] = useState([]);
 
     useEffect(() => {
         const refresh = navigation.addListener('focus', () => {
@@ -27,6 +28,9 @@ const HomeScreen = ({ navigation }) => {
 
                 const productList = Object.values(groupedProducts);
                 setProducts(productList);
+
+                const nearExpiration = transactions.filter(isNearExpiration);
+                setNearExpirationProducts(nearExpiration);
             };
 
             fetchData();
@@ -39,6 +43,7 @@ const HomeScreen = ({ navigation }) => {
         const success = await handleClearTransactions();
         if (success) {
             setProducts([]);
+            setNearExpirationProducts([]);
         }
     };
 
@@ -59,6 +64,10 @@ const HomeScreen = ({ navigation }) => {
 
     return (
         <View style={styles.homeContainer}>
+            <View style={styles.titleContainer}>
+                <Text style={styles.title}>Produtos</Text>
+            </View>
+
             <FlatList
                 data={products}
                 keyExtractor={(item) => `${item.product}_${item.category}`}
@@ -72,19 +81,41 @@ const HomeScreen = ({ navigation }) => {
                         </Text>
                     </TouchableOpacity>
                 )}
+                style={styles.flatList}
             />
-            <TouchableOpacity 
-                style={styles.addButton} 
-                onPress={() => navigation.navigate('AddProduct')}
-            >
-                <Text style={styles.addButtonText}>Adicionar Produto</Text>
-            </TouchableOpacity>
-            <TouchableOpacity 
-                style={styles.clearButton} 
-                onPress={handleClear}
-            >
-                <Text style={styles.clearButtonText}>Limpar Produtos</Text>
-            </TouchableOpacity>
+
+            <View style={styles.titleContainer}>
+                <Text style={styles.title}>Produtos Vencendo</Text>
+            </View>
+
+            <FlatList
+                data={nearExpirationProducts}
+                keyExtractor={(item) => item.id}
+                renderItem={({ item }) => (
+                    <View style={styles.nearExpirationItem}>
+                        <Text>
+                            Produto: {formatProductName(item.product)} --- Categoria: {formatCategory(item.category)} --- Quantidade: {item.quantity} --- Validade: {item.validity.toLocaleDateString()}
+                        </Text>
+                    </View>
+                )}
+                style={styles.flatList}
+            />
+
+            <View style={styles.buttonContainer}>
+                <TouchableOpacity 
+                    style={styles.addButton} 
+                    onPress={() => navigation.navigate('AddProduct')}
+                >
+                    <Text style={styles.addButtonText}>Adicionar Produto</Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity 
+                    style={styles.clearButton} 
+                    onPress={handleClear}
+                >
+                    <Text style={styles.clearButtonText}>Limpar Produtos</Text>
+                </TouchableOpacity>
+            </View>
         </View>
     );
 };

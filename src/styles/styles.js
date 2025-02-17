@@ -7,6 +7,17 @@ const styles = StyleSheet.create({
         padding: 16,
         justifyContent: 'flex-start',
     },
+    titleContainer: {
+        marginBottom: 8,
+    },
+    title: {
+        fontSize: 20,
+        fontWeight: 'bold',
+    },
+    flatList: {
+        flex: 1,
+        marginBottom: 16,
+    },
     listItem: {
         padding: 16,
         borderBottomWidth: 1,
@@ -15,6 +26,9 @@ const styles = StyleSheet.create({
     },
     listText: {
         fontSize: 16,
+    },
+    buttonContainer: {
+        marginTop: 16,
     },
     addButton: {
         marginTop: 16,

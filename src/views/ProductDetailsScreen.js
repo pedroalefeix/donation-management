@@ -4,7 +4,7 @@ import { loadTransactions } from "../controllers/transactionController";
 import { deleteTransaction } from "../models/transactionManager";
 import styles from "../styles/styles";
 
-const ProductDetailsScreen = ({ route }) => {
+const ProductDetailsScreen = ({ route, navigation }) => {
     const { productName, category: routeCategory } = route.params;
     const [productDetails, setProductDetails] = useState([]);
 
@@ -22,9 +22,16 @@ const ProductDetailsScreen = ({ route }) => {
     const handleDelete = async (id) => {
         await deleteTransaction(id);
 
-        const updatedTransactions = await loadTransactions();
-        const filteredProducts = updatedTransactions.filter(item => item.product === productName);
-        setProductDetails(filteredProducts);
+        const transactions = await loadTransactions();
+        const remainingProducts = transactions.filter(item => item.product === productName && item.category === routeCategory);
+
+        if (remainingProducts.length === 0) {
+            navigation.navigate('Home');
+        } else {
+            const updatedTransactions = await loadTransactions();
+            const filteredProducts = updatedTransactions.filter(item => item.product === productName && item.category === routeCategory);
+            setProductDetails(filteredProducts);
+        }
     }
 
     return (
@@ -36,9 +43,11 @@ const ProductDetailsScreen = ({ route }) => {
                 renderItem={({ item }) => (
                     <View style={styles.productDetailItem}>
                         <Text>Quantidade: {item.quantity}</Text>
+
                         {item.category !== 'cleaning' && (
-                            <Text>Validade: {item.validity}</Text>
+                            <Text>Validade: {item.validity ? item.validity.toLocaleDateString() : 'N/A'}</Text>
                         )}
+
                         <TouchableOpacity style={styles.deleteButton} onPress={() => handleDelete(item.id)}>
                             <Text style={styles.deleteButtonText}>Excluir</Text>
                         </TouchableOpacity>

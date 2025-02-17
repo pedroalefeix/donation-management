@@ -14,8 +14,8 @@ const AddProductScreen = ({ navigation }) => {
 
     useEffect(() => {
         const defaultValidity = new Date();
-        defaultValidity.setDate(defaultValidity.getDate() + 7); // Add 7 days
-        setValidity(defaultValidity); // Set the default validity
+        defaultValidity.setDate(defaultValidity.getDate() + 7);
+        setValidity(defaultValidity);
     }, []);
 
     const handleAddProductPress = async () => {
