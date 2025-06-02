@@ -83,7 +83,7 @@ const HomeScreen = ({ navigation }) => {
 		>
 			<Text style={styles.listText}>
 				Produto: {formatProductName(item.product)} --- Categoria:{" "}
-				{formatCategory(item.category)} --- Quantidade Total:{" "}
+				{formatCategory(item.category)} --- Quantidade Total (kg, ml):{" "}
 				{item.quantity}
 			</Text>
 		</TouchableOpacity>

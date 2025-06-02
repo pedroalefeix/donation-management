@@ -95,7 +95,7 @@ const AddProductScreen = ({ navigation }) => {
 
 			{/* Quantity */}
 			<View style={styles.inputContainer}>
-				<Text style={styles.label}>Quantidade</Text>
+				<Text style={styles.label}>Quantidade (kg, ml)</Text>
 				<TextInput
 					style={styles.input}
 					placeholder="Quantidade"
