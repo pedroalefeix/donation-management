@@ -1,61 +1,72 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { View, Text, FlatList, TouchableOpacity } from "react-native";
 import { loadTransactions } from "../controllers/transactionController";
 import { deleteTransaction } from "../models/transactionManager";
 import styles from "../styles/styles";
 
 const ProductDetailsScreen = ({ route, navigation }) => {
-    const { productName, category: routeCategory } = route.params;
-    const [productDetails, setProductDetails] = useState([]);
+	const { productName, category } = route.params;
+	const [productDetails, setProductDetails] = useState([]);
 
-    useEffect(() => {
-        const fetchProductDetails = async () => {
-            const transactions = await loadTransactions();
+	useEffect(() => {
+		const fetchProductDetails = async () => {
+			const transactions = await loadTransactions();
+			const filteredProducts = transactions.filter(
+				(item) =>
+					item.product === productName && item.category === category
+			);
+			setProductDetails(filteredProducts);
+		};
 
-            const filteredProducts = transactions.filter(item => item.product === productName && item.category === routeCategory);
-            setProductDetails(filteredProducts);
-        };
+		fetchProductDetails();
+	}, [productName, category]);
 
-        fetchProductDetails();
-    }, [productName, routeCategory]);
+	const handleDelete = useCallback(
+		async (id) => {
+			await deleteTransaction(id);
+			setProductDetails((prevDetails) =>
+				prevDetails.filter((item) => item.id !== id)
+			);
 
-    const handleDelete = async (id) => {
-        await deleteTransaction(id);
+			if (productDetails.length === 1) {
+				navigation.navigate("Home");
+			}
+		},
+		[navigation, productDetails]
+	);
 
-        const transactions = await loadTransactions();
-        const remainingProducts = transactions.filter(item => item.product === productName && item.category === routeCategory);
+	const renderProductDetail = ({ item }) => (
+		<View style={styles.productDetailItem}>
+			<Text>Quantidade: {item.quantity}</Text>
+			{item.category !== "cleaning" && (
+				<Text>
+					Validade:{" "}
+					{item.validity ? formatDate(item.validity) : "N/A"}
+				</Text>
+			)}
+			<TouchableOpacity
+				style={styles.deleteButton}
+				onPress={() => handleDelete(item.id)}
+			>
+				<Text style={styles.deleteButtonText}>Excluir</Text>
+			</TouchableOpacity>
+		</View>
+	);
 
-        if (remainingProducts.length === 0) {
-            navigation.navigate('Home');
-        } else {
-            const updatedTransactions = await loadTransactions();
-            const filteredProducts = updatedTransactions.filter(item => item.product === productName && item.category === routeCategory);
-            setProductDetails(filteredProducts);
-        }
-    }
+	const formatDate = (date) => {
+		return date.toLocaleDateString("pt-BR", { timeZone: "UTC" });
+	};
 
-    return (
-        <View style={styles.container}>
-            <Text style={styles.title}>{productName}</Text>
-            <FlatList
-                data={productDetails}
-                keyExtractor={(item) => item.id.toString()}
-                renderItem={({ item }) => (
-                    <View style={styles.productDetailItem}>
-                        <Text>Quantidade: {item.quantity}</Text>
-
-                        {item.category !== 'cleaning' && (
-                            <Text>Validade: {item.validity ? item.validity.toLocaleDateString() : 'N/A'}</Text>
-                        )}
-
-                        <TouchableOpacity style={styles.deleteButton} onPress={() => handleDelete(item.id)}>
-                            <Text style={styles.deleteButtonText}>Excluir</Text>
-                        </TouchableOpacity>
-                    </View>
-                )}
-            />
-        </View>
-    );
+	return (
+		<View style={styles.container}>
+			<Text style={styles.title}>{productName}</Text>
+			<FlatList
+				data={productDetails}
+				keyExtractor={(item) => item.id.toString()} // Ensure id is a string
+				renderItem={renderProductDetail}
+			/>
+		</View>
+	);
 };
 
 export default ProductDetailsScreen;
