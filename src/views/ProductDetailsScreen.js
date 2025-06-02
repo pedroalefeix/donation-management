@@ -37,7 +37,7 @@ const ProductDetailsScreen = ({ route, navigation }) => {
 
 	const renderProductDetail = ({ item }) => (
 		<View style={styles.productDetailItem}>
-			<Text>Quantidade: {item.quantity}</Text>
+			<Text>Quantidade (kg, ml): {item.quantity}</Text>
 			{item.category !== "cleaning" && (
 				<Text>
 					Validade:{" "}
