@@ -29,6 +29,7 @@ const styles = StyleSheet.create({
 	},
 	buttonContainer: {
 		marginTop: 16,
+		paddingBottom: 40,
 	},
 	addButton: {
 		marginTop: 16,
